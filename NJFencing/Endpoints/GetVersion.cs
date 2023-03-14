@@ -14,6 +14,6 @@ public class Endpoint : EndpointWithoutRequest<Response>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await SendAsync(new Response("v0.0.1"), 200, ct);
+        await SendAsync(new Response("v0.0.1"), cancellation: ct);
     }
 }
