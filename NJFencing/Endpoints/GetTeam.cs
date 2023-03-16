@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using NJFencing.Database;
 using NJFencing.Models;
 
-namespace NJFencing.Endpoints.GetAccount;
+namespace NJFencing.Endpoints.GetTeam;
 
-using Response = Account;
+using Response = Team;
 
 public class Request
 {
@@ -28,13 +28,13 @@ public class Endpoint : Endpoint<Request, Response>
     
     public override void Configure()
     {
-        Get("accounts/{Id}");
+        Get("teams/{Id}");
         AllowAnonymous();
     }
     
     public override async Task HandleAsync(Request request, CancellationToken ct)
     {
-        var acc = await Db.Accounts.Where(l => l.Id == request.Id).FirstOrDefaultAsync(ct);
+        var acc = await Db.Teams.Where(l => l.Id == request.Id).FirstOrDefaultAsync(ct);
 
         if (acc == null)
         {

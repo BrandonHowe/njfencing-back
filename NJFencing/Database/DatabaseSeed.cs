@@ -35,9 +35,7 @@ public class DatabaseSeed
                 Conference = Conference.Northwest,
                 Coach = "Lisa Campi-Sapery",
                 Icon = "google.com",
-                Name = "Morris Hills",
-                HomeMeets = new List<DualMeet>(),
-                AwayMeets = new List<DualMeet>()
+                Name = "Morris Hills"
             };
 
             var mc = new Team
@@ -47,9 +45,7 @@ public class DatabaseSeed
                 Conference = Conference.Northwest,
                 Coach = "Michael Malecki",
                 Icon = "google.com",
-                Name = "Morris Catholic",
-                HomeMeets = new List<DualMeet>(),
-                AwayMeets = new List<DualMeet>()
+                Name = "Morris Catholic"
             };
 
             db.Teams.Add(mh);
