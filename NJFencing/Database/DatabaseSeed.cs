@@ -1,4 +1,5 @@
 ﻿using NJFencing.Models;
+using NJFencing.Utilities;
 
 namespace NJFencing.Database;
 
@@ -13,16 +14,69 @@ public class DatabaseSeed
 
     public void Seed()
     {
-        if (db.Accounts.Any()) return;
-
-        var myAcc = new Account
+        if (!db.Accounts.Any())
         {
-            Id = Nanoid.Nanoid.Generate(),
-            CreatedAt = DateTime.UtcNow,
-            Email = "swag@money.com"
-        };
+            var myAcc = new Account
+            {
+                Id = Nanoid.Nanoid.Generate(),
+                CreatedAt = DateTime.UtcNow,
+                Email = "swag@money.com"
+            };
 
-        db.Accounts.Add(myAcc);
+            db.Accounts.Add(myAcc); 
+        }
+
+        if (!db.Teams.Any())
+        {
+            var mh = new Team
+            {
+                Id = Nanoid.Nanoid.Generate(),
+                Abbreviation = "MH",
+                Conference = Conference.Northwest,
+                Coach = "Lisa Campi-Sapery",
+                Icon = "google.com",
+                Name = "Morris Hills",
+                HomeMeets = new List<DualMeet>(),
+                AwayMeets = new List<DualMeet>()
+            };
+
+            var mc = new Team
+            {
+                Id = Nanoid.Nanoid.Generate(),
+                Abbreviation = "MC",
+                Conference = Conference.Northwest,
+                Coach = "Michael Malecki",
+                Icon = "google.com",
+                Name = "Morris Catholic",
+                HomeMeets = new List<DualMeet>(),
+                AwayMeets = new List<DualMeet>()
+            };
+
+            db.Teams.Add(mh);
+            db.Teams.Add(mc);
+
+            if (!db.DualMeets.Any())
+            {
+                var dualMeet = new DualMeet
+                {
+                    Id = Nanoid.Nanoid.Generate(),
+                    Conference = true,
+                    Team1 = mh,
+                    Team2 = mc,
+                    Date = DateTime.UtcNow,
+                    Team1Score1 = 4,
+                    Team2Score1 = 5,
+                    Team1Score2 = 4,
+                    Team2Score2 = 5,
+                    Team1Score3 = 3,
+                    Team2Score3 = 6,
+                    Records = new List<FencerRecord>()
+                };
+
+                db.DualMeets.Add(dualMeet);
+            }
+        }
+
         db.SaveChanges();
     }
 }
