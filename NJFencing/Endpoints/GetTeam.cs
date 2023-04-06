@@ -34,7 +34,11 @@ public class Endpoint : Endpoint<Request, Response>
     
     public override async Task HandleAsync(Request request, CancellationToken ct)
     {
-        var acc = await Db.Teams.Where(l => l.Id == request.Id).FirstOrDefaultAsync(ct);
+        var acc = await Db.Teams
+            .Where(l => l.Id == request.Id)
+            .Include(l => l.HomeMeets)
+            .Include(l => l.AwayMeets)
+            .FirstOrDefaultAsync(ct);
 
         if (acc == null)
         {

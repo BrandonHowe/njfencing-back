@@ -54,6 +54,9 @@ namespace NJFencing.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<short>("Team1Score")
+                        .HasColumnType("smallint");
+
                     b.Property<short>("Team1Score1")
                         .HasColumnType("smallint");
 
@@ -66,6 +69,9 @@ namespace NJFencing.Migrations
                     b.Property<string>("Team2Id")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<short>("Team2Score")
+                        .HasColumnType("smallint");
 
                     b.Property<short>("Team2Score1")
                         .HasColumnType("smallint");
@@ -148,15 +154,12 @@ namespace NJFencing.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Coach")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Conference")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Icon")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")

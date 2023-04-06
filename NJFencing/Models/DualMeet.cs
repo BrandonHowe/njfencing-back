@@ -18,6 +18,8 @@ public class DualMeet
     public sbyte Team1Score2 { get; set; }
     [DefaultValue(0)]
     public sbyte Team1Score3 { get; set; }
+    [DefaultValue(0)]
+    public sbyte Team1Score { get; set; }
     public string Team2Id { get; set; }
     [ForeignKey("Team2Id")]
     public Team Team2 { get; set; }
@@ -27,6 +29,8 @@ public class DualMeet
     public sbyte Team2Score2 { get; set; }
     [DefaultValue(0)]
     public sbyte Team2Score3 { get; set; }
+    [DefaultValue(0)]
+    public sbyte Team2Score { get; set; }
     
     public List<FencerRecord> Records { get; set; }
 }

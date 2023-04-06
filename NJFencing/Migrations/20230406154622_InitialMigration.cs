@@ -44,9 +44,9 @@ namespace NJFencing.Migrations
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
                     Abbreviation = table.Column<string>(type: "text", nullable: false),
-                    Coach = table.Column<string>(type: "text", nullable: false),
-                    Conference = table.Column<string>(type: "text", nullable: false),
-                    Icon = table.Column<string>(type: "text", nullable: false),
+                    Coach = table.Column<string>(type: "text", nullable: true),
+                    Conference = table.Column<string>(type: "text", nullable: true),
+                    Icon = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -65,10 +65,12 @@ namespace NJFencing.Migrations
                     Team1Score1 = table.Column<short>(type: "smallint", nullable: false),
                     Team1Score2 = table.Column<short>(type: "smallint", nullable: false),
                     Team1Score3 = table.Column<short>(type: "smallint", nullable: false),
+                    Team1Score = table.Column<short>(type: "smallint", nullable: false),
                     Team2Id = table.Column<string>(type: "text", nullable: false),
                     Team2Score1 = table.Column<short>(type: "smallint", nullable: false),
                     Team2Score2 = table.Column<short>(type: "smallint", nullable: false),
-                    Team2Score3 = table.Column<short>(type: "smallint", nullable: false)
+                    Team2Score3 = table.Column<short>(type: "smallint", nullable: false),
+                    Team2Score = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {

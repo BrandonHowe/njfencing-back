@@ -1,9 +1,22 @@
+using System.Text.Json.Serialization;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using NJFencing.Database;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://localhost:3000");
+        });
+});
 
 // Add services to the container.
 
@@ -16,6 +29,10 @@ builder.Services.AddDbContext<DatabaseContext>(b =>
     b.UseNpgsql(builder.Configuration["DatabaseSettings:ConnectionString"]);
 });
 builder.Services.AddScoped<DatabaseSeed>();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 var app = builder.Build();
 
@@ -28,6 +45,8 @@ app.UseAuthorization();
 app.UseHsts();
 
 app.UseFastEndpoints();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -66,6 +66,8 @@ public class DatabaseSeed
                     Team2Score2 = 5,
                     Team1Score3 = 3,
                     Team2Score3 = 6,
+                    Team1Score = 11,
+                    Team2Score = 16,
                     Records = new List<FencerRecord>()
                 };
 
