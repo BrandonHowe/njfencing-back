@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NJFencing.Database;
+using NJFencing.Endpoints.GetVersion;
 using NJFencing.Models;
 
 namespace NJFencing.Endpoints.GetAccount;

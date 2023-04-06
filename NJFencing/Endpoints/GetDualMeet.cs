@@ -28,7 +28,7 @@ public class Endpoint : Endpoint<Request, Response>
     
     public override void Configure()
     {
-        Get("dualMeets/{Id}");
+        Get("dualMeet/{Id}");
         AllowAnonymous();
     }
     

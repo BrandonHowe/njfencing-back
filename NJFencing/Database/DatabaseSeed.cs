@@ -34,7 +34,7 @@ public class DatabaseSeed
                 Abbreviation = "MH",
                 Conference = Conference.Northwest,
                 Coach = "Lisa Campi-Sapery",
-                Icon = "google.com",
+                Icon = "https://nj.vsand-static.com/Logos/3954.png",
                 Name = "Morris Hills"
             };
 
@@ -44,7 +44,7 @@ public class DatabaseSeed
                 Abbreviation = "MC",
                 Conference = Conference.Northwest,
                 Coach = "Michael Malecki",
-                Icon = "google.com",
+                Icon = "https://nj.vsand-static.com/Logos/5829.png",
                 Name = "Morris Catholic"
             };
 
