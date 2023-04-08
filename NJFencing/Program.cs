@@ -29,10 +29,6 @@ builder.Services.AddDbContext<DatabaseContext>(b =>
     b.UseNpgsql(builder.Configuration["DatabaseSettings:ConnectionString"]);
 });
 builder.Services.AddScoped<DatabaseSeed>();
-builder.Services.AddControllersWithViews()
-    .AddJsonOptions(options => {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    });
 
 var app = builder.Build();
 
@@ -44,7 +40,10 @@ app.UseAuthorization();
 
 app.UseHsts();
 
-app.UseFastEndpoints();
+app.UseFastEndpoints(c =>
+{
+    c.Serializer.Options.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 
 app.UseCors(MyAllowSpecificOrigins);
 

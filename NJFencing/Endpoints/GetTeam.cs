@@ -1,4 +1,5 @@
-﻿using FastEndpoints;
+﻿using System.Text.Json;
+using FastEndpoints;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using NJFencing.Database;
@@ -36,16 +37,16 @@ public class Endpoint : Endpoint<Request, Response>
     {
         var acc = await Db.Teams
             .Where(l => l.Id == request.Id)
-            .Include(l => l.HomeMeets)
-            .Include(l => l.AwayMeets)
+            .Include(l => l.HomeMeets).ThenInclude(l => l.Team2)
+            .Include(l => l.AwayMeets).ThenInclude(l => l.Team1)
             .FirstOrDefaultAsync(ct);
-
+        
         if (acc == null)
         {
             await SendNotFoundAsync(ct);
             return;
         }
-
+        
         await SendAsync(acc, cancellation: ct);
     }
 }
