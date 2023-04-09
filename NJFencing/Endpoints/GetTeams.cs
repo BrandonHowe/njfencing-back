@@ -21,6 +21,7 @@ public class Endpoint : EndpointWithoutRequest<Response>
     public override async Task HandleAsync(CancellationToken ct)
     {
         var teams = await Db.Teams
+            .OrderBy(l => l.Name)
             .ToListAsync(ct);
 
         await SendAsync(teams, cancellation: ct);

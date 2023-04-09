@@ -28,14 +28,30 @@ public class DatabaseSeed
 
         if (!db.Teams.Any())
         {
-            var mh = new Team
+            var mhmens = new Team
             {
                 Id = Nanoid.Nanoid.Generate(),
                 Abbreviation = "MH",
                 Conference = Conference.Northwest,
                 Coach = "Lisa Campi-Sapery",
                 Icon = "https://nj.vsand-static.com/Logos/3954.png",
-                Name = "Morris Hills"
+                Name = "Morris Hills",
+                Town = "Rockaway",
+                Mascot = "Scarlet Knights",
+                Gender = Gender.Mens
+            };
+            
+            var mhwomens = new Team
+            {
+                Id = Nanoid.Nanoid.Generate(),
+                Abbreviation = "MH",
+                Conference = Conference.Northwest,
+                Coach = "John Nugent",
+                Icon = "https://nj.vsand-static.com/Logos/3954.png",
+                Name = "Morris Hills",
+                Town = "Rockaway",
+                Mascot = "Scarlet Knights",
+                Gender = Gender.Womens
             };
 
             var mc = new Team
@@ -45,10 +61,14 @@ public class DatabaseSeed
                 Conference = Conference.Northwest,
                 Coach = "Michael Malecki",
                 Icon = "https://nj.vsand-static.com/Logos/5829.png",
-                Name = "Morris Catholic"
+                Name = "Morris Catholic",
+                Town = "Denville",
+                Mascot = "Crusaders",
+                Gender = Gender.Mens
             };
 
-            db.Teams.Add(mh);
+            db.Teams.Add(mhmens);
+            db.Teams.Add(mhwomens);
             db.Teams.Add(mc);
 
             if (!db.DualMeets.Any())
@@ -57,7 +77,7 @@ public class DatabaseSeed
                 {
                     Id = Nanoid.Nanoid.Generate(),
                     Conference = true,
-                    Team1 = mh,
+                    Team1 = mhmens,
                     Team2 = mc,
                     Date = DateTime.UtcNow,
                     Team1Score1 = 4,

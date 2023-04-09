@@ -7,6 +7,12 @@ public enum Weapon
     Epee
 }
 
+public enum Gender
+{
+    Mens,
+    Womens
+}
+
 public enum Conference
 {
     BigNorth,

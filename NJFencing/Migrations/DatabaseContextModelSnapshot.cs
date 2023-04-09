@@ -159,10 +159,22 @@ namespace NJFencing.Migrations
                     b.Property<string>("Conference")
                         .HasColumnType("text");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Icon")
                         .HasColumnType("text");
 
+                    b.Property<string>("Mascot")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Town")
                         .IsRequired()
                         .HasColumnType("text");
 

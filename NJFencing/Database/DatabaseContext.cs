@@ -27,6 +27,13 @@ public class DatabaseContext : DbContext
             .HasConversion(
                 v => v.ToString(),
                 v => (Conference)Enum.Parse(typeof(Conference), v));
+        
+        modelBuilder
+            .Entity<Team>()
+            .Property(e => e.Gender)
+            .HasConversion(
+                v => v == Gender.Mens ? "Men's" : "Women's",
+                v => v == "Women's" ? Gender.Womens : Gender.Mens);
     }
     
     public DatabaseContext(DbContextOptions options) : base(options)

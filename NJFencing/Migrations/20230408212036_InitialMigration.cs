@@ -46,8 +46,11 @@ namespace NJFencing.Migrations
                     Abbreviation = table.Column<string>(type: "text", nullable: false),
                     Coach = table.Column<string>(type: "text", nullable: true),
                     Conference = table.Column<string>(type: "text", nullable: true),
+                    Gender = table.Column<string>(type: "text", nullable: false),
                     Icon = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Town = table.Column<string>(type: "text", nullable: false),
+                    Mascot = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

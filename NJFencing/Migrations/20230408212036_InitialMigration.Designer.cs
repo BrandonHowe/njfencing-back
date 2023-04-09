@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NJFencing.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230406154622_InitialMigration")]
+    [Migration("20230408212036_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -162,10 +162,22 @@ namespace NJFencing.Migrations
                     b.Property<string>("Conference")
                         .HasColumnType("text");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Icon")
                         .HasColumnType("text");
 
+                    b.Property<string>("Mascot")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Town")
                         .IsRequired()
                         .HasColumnType("text");
 
