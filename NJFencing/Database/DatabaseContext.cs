@@ -11,6 +11,7 @@ public class DatabaseContext : DbContext
     public DbSet<Fencer> Fencers { get; set; }
     public DbSet<FencerRecord> FencerRecords { get; set; }
     public DbSet<Team> Teams { get; set; }
+    public DbSet<Roster> Rosters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

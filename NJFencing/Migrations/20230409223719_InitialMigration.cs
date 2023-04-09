@@ -79,6 +79,25 @@ namespace NJFencing.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rosters",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    TeamId = table.Column<string>(type: "text", nullable: false),
+                    Season = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rosters", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rosters_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fencers",
                 columns: table => new
                 {
@@ -86,11 +105,17 @@ namespace NJFencing.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
                     GradYear = table.Column<int>(type: "integer", nullable: false),
-                    TeamId = table.Column<string>(type: "text", nullable: false)
+                    TeamId = table.Column<string>(type: "text", nullable: false),
+                    RosterId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fencers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fencers_Rosters_RosterId",
+                        column: x => x.RosterId,
+                        principalTable: "Rosters",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Fencers_Teams_TeamId",
                         column: x => x.TeamId,
@@ -148,8 +173,18 @@ namespace NJFencing.Migrations
                 column: "MeetId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Fencers_RosterId",
+                table: "Fencers",
+                column: "RosterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Fencers_TeamId",
                 table: "Fencers",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rosters_TeamId",
+                table: "Rosters",
                 column: "TeamId");
         }
 
@@ -167,6 +202,9 @@ namespace NJFencing.Migrations
 
             migrationBuilder.DropTable(
                 name: "Fencers");
+
+            migrationBuilder.DropTable(
+                name: "Rosters");
 
             migrationBuilder.DropTable(
                 name: "Teams");

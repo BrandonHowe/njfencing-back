@@ -38,7 +38,8 @@ public class DatabaseSeed
                 Name = "Morris Hills",
                 Town = "Rockaway",
                 Mascot = "Scarlet Knights",
-                Gender = Gender.Mens
+                Gender = Gender.Mens,
+                Rosters = new List<Roster>()
             };
             
             var mhwomens = new Team
@@ -51,7 +52,8 @@ public class DatabaseSeed
                 Name = "Morris Hills",
                 Town = "Rockaway",
                 Mascot = "Scarlet Knights",
-                Gender = Gender.Womens
+                Gender = Gender.Womens,
+                Rosters = new List<Roster>()
             };
 
             var mc = new Team
@@ -64,7 +66,8 @@ public class DatabaseSeed
                 Name = "Morris Catholic",
                 Town = "Denville",
                 Mascot = "Crusaders",
-                Gender = Gender.Mens
+                Gender = Gender.Mens,
+                Rosters = new List<Roster>()
             };
 
             db.Teams.Add(mhmens);
@@ -104,6 +107,23 @@ public class DatabaseSeed
                 db.Fencers.Add(nicotra);
                 db.Fencers.Add(kellish);
                 db.Fencers.Add(richardson);
+
+                var mhRoster = new Roster()
+                {
+                    Id = Nanoid.Nanoid.Generate(),
+                    Season = 2023,
+                    Team = mhmens,
+                    Fencers = new List<Fencer>() { me, moses, joel, adham, josh, harry }
+                };
+                var mcRoster = new Roster()
+                {
+                    Id = Nanoid.Nanoid.Generate(),
+                    Season = 2023,
+                    Team = mc,
+                    Fencers = new List<Fencer>() { trudnos, dwyer, forrester, concha, demarco, ross, nicotra, kellish, richardson }
+                };
+                db.Rosters.Add(mhRoster);
+                db.Rosters.Add(mcRoster);
                 #endregion
                 
                 var dualMeet = new DualMeet

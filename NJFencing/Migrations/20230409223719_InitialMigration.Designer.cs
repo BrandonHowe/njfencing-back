@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NJFencing.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230409164827_InitialMigration")]
+    [Migration("20230409223719_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -110,11 +110,16 @@ namespace NJFencing.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("RosterId")
+                        .HasColumnType("text");
+
                     b.Property<string>("TeamId")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RosterId");
 
                     b.HasIndex("TeamId");
 
@@ -151,6 +156,25 @@ namespace NJFencing.Migrations
                     b.HasIndex("MeetId");
 
                     b.ToTable("FencerRecords");
+                });
+
+            modelBuilder.Entity("NJFencing.Models.Roster", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Season")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TeamId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("Rosters");
                 });
 
             modelBuilder.Entity("NJFencing.Models.Team", b =>
@@ -213,6 +237,10 @@ namespace NJFencing.Migrations
 
             modelBuilder.Entity("NJFencing.Models.Fencer", b =>
                 {
+                    b.HasOne("NJFencing.Models.Roster", null)
+                        .WithMany("Fencers")
+                        .HasForeignKey("RosterId");
+
                     b.HasOne("NJFencing.Models.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
@@ -241,6 +269,17 @@ namespace NJFencing.Migrations
                     b.Navigation("Meet");
                 });
 
+            modelBuilder.Entity("NJFencing.Models.Roster", b =>
+                {
+                    b.HasOne("NJFencing.Models.Team", "Team")
+                        .WithMany("Rosters")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("NJFencing.Models.DualMeet", b =>
                 {
                     b.Navigation("Records");
@@ -251,11 +290,18 @@ namespace NJFencing.Migrations
                     b.Navigation("Records");
                 });
 
+            modelBuilder.Entity("NJFencing.Models.Roster", b =>
+                {
+                    b.Navigation("Fencers");
+                });
+
             modelBuilder.Entity("NJFencing.Models.Team", b =>
                 {
                     b.Navigation("AwayMeets");
 
                     b.Navigation("HomeMeets");
+
+                    b.Navigation("Rosters");
                 });
 #pragma warning restore 612, 618
         }

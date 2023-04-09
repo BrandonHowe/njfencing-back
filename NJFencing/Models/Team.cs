@@ -20,4 +20,6 @@ public class Team
     public List<DualMeet> HomeMeets { get; set; }
     [InverseProperty("Team2")]
     public List<DualMeet> AwayMeets { get; set; }
+    [InverseProperty("Team")]
+    public List<Roster> Rosters { get; set; }
 }
