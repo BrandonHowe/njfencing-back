@@ -31,6 +31,6 @@ public class DualMeet
     public sbyte Team2Score3 { get; set; }
     [DefaultValue(0)]
     public sbyte Team2Score { get; set; }
-    
+    [InverseProperty("Meet")]
     public List<FencerRecord> Records { get; set; }
 }

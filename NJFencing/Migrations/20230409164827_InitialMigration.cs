@@ -25,20 +25,6 @@ namespace NJFencing.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Fencers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
-                    GradYear = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fencers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Teams",
                 columns: table => new
                 {
@@ -93,6 +79,27 @@ namespace NJFencing.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Fencers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    GradYear = table.Column<int>(type: "integer", nullable: false),
+                    TeamId = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fencers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Fencers_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FencerRecords",
                 columns: table => new
                 {
@@ -139,6 +146,11 @@ namespace NJFencing.Migrations
                 name: "IX_FencerRecords_MeetId",
                 table: "FencerRecords",
                 column: "MeetId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Fencers_TeamId",
+                table: "Fencers",
+                column: "TeamId");
         }
 
         /// <inheritdoc />

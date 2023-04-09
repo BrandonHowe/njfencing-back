@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NJFencing.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230408212036_InitialMigration")]
+    [Migration("20230409164827_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -110,7 +110,13 @@ namespace NJFencing.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("TeamId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TeamId");
 
                     b.ToTable("Fencers");
                 });
@@ -203,6 +209,17 @@ namespace NJFencing.Migrations
                     b.Navigation("Team1");
 
                     b.Navigation("Team2");
+                });
+
+            modelBuilder.Entity("NJFencing.Models.Fencer", b =>
+                {
+                    b.HasOne("NJFencing.Models.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("NJFencing.Models.FencerRecord", b =>

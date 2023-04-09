@@ -38,6 +38,7 @@ public class Endpoint : Endpoint<Request, Response>
             .Where(l => l.Id == request.Id)
             .Include(l => l.Team1)
             .Include(l => l.Team2)
+            .Include(l => l.Records).ThenInclude(l => l.Fencer)
             .FirstOrDefaultAsync(ct);
 
         if (acc == null)
